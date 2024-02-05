@@ -1,11 +1,48 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
+    <link rel="stylesheet" href={% static 'index.css' %}>
   </head>
   <body>
-    <h1>Hi there, Welcome</h1>
+    <header class="header">
+      <a href="#" class="logo">DCM</a>
+      <a href="#" class="login">Log in</a>
+    </header>
+    <main>
+      <div class="popup_form">
+        <h1>Hello</h1>
+        <p>hello there</p>
+      </div>
+      <div class="table">
+        <div class="tabel_header">
+          <h1>Contacts</h1>
+          <button class="add_btn">+Add</button>
+        </div>
+        <section class="table_body">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>E-mail</th>
+                <th>Location</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Barry</td>
+                <td>0599306715</td>
+                <td>barrystarrck@gmail.com</td>
+                <td>Ho-Dome, Volta Region, Ghana</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </main>
   </body>
 </html>
