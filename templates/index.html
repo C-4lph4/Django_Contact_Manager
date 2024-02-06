@@ -13,12 +13,50 @@
       <a href="#" class="login">Log in</a>
     </header>
     <main>
+      {%if editForm%}
+      <div class="edit_form">
+        <form action="" method="post">
+          {%csrf_token%} {{editForm}}
+          <div class="sub_btns">
+            <button
+              class="close_btn"
+              type="submit"
+              name="edited"
+              value="{{contact_id}}"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+      {%else%}
       <div class="popup_form" id="form">
         <form action="" method="post">
-          {%csrf_token%} 
-          {{form}}
-          <button class="close_btn" onclick="closeForm()">Submit</button>
+          {%csrf_token%} {{addForm}}
+          <div class="sub_btns">
+            <button class="close_btn" type="button" onclick="closeForm()">
+              Cancel
+            </button>
+            <button
+              class="close_btn"
+              type="submit"
+              value="add"
+              onclick="closeForm()"
+            >
+              Submit
+            </button>
+          </div>
         </form>
+      </div>
+      {%endif%}
+      <div class="prompt" id="prompt">
+        <p>Delete this contact?</p>
+        <div class="confirm_btns">
+          <button class="conf_No" onclick="closePrompt()">No</button>
+          <a id="del_link" href="#"
+            ><button class="conf_Yes" onclick="closePrompt()">Yes</button></a
+          >
+        </div>
       </div>
       <div class="head">
         <h1>Contacts</h1>
@@ -43,10 +81,20 @@
                 <td>{{contact.email}}</td>
                 <td>{{contact.address}}</td>
                 <td>
-                  <button class="edit_btn" onclick="closeForm()">Edit</button>
+                  <form action="" method="post">
+                    {%csrf_token%}
+                    <button
+                      onclick="edit"
+                      class="edit_btn"
+                      name="edit"
+                      value="{{contact.id}}"
+                    >
+                      Edit
+                    </button>
+                  </form>
                 </td>
                 <td>
-                  <button class="del_btn" onclick="closeForm()">-Delete</button>
+                  <button class="del_btn" value="{{contact.id}}">Delete</button>
                 </td>
               </tr>
               {%endfor%}
@@ -56,12 +104,29 @@
       </div>
     </main>
     <script>
-      let form = document.getElementById("form");
+      const form = document.getElementById("form");
+      const prompt = document.getElementById("prompt");
+      const delete_link = document.getElementById("del_link");
+      const delete_btns = document.querySelectorAll(".del_btn");
+      delete_btns.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          showPrompt();
+          const btn_value = btn.value;
+          delete_link.href = "del/" + btn_value;
+        });
+      });
+
       function showForm() {
         form.classList.add("open_form");
       }
       function closeForm() {
         form.classList.remove("open_form");
+      }
+      function showPrompt() {
+        prompt.classList.add("show_prompt");
+      }
+      function closePrompt() {
+        prompt.classList.remove("show_prompt");
       }
     </script>
   </body>

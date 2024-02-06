@@ -68,6 +68,7 @@ main{
 
 
 .popup_form{
+    
     padding: 12px;
     background: rgb(72, 104, 220);
     border-radius: 10px;
@@ -81,6 +82,18 @@ main{
     
     
 }
+.edit_form{
+    padding: 12px;
+    background: rgb(72, 104, 220);
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) ;
+    
+    
+    
+}
 .open_form{
     
     top: 50%;
@@ -88,6 +101,7 @@ main{
     visibility: visible;
 }
 .close_btn{
+    margin: auto;
     padding: 8px 14px;
     border: none;
     border-radius: 8px;
@@ -98,12 +112,43 @@ main{
     border: none;
     border-radius: 8px;
     color: white;
-    background-color:rgb(46, 237, 94) 
+    background-color:rgb(46, 237, 94) ;
+
 }
 .del_btn{
     padding: 8px 14px;
     border: none;
     border-radius: 8px;
     color:white;
-    background-color:rgb(225, 47, 35) 
+    background-color:rgb(225, 47, 35);
+}
+
+.prompt{
+    padding: 12px;
+    background: rgb(151, 224, 157);
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0.1);
+    visibility: hidden;
+    transition: transform 0.4s, top 0.4s;
+}
+button{
+    cursor: pointer;
+}
+.show_prompt{
+    top: 50%;
+    transform: translate(-50%,-50%) scale(1);
+    visibility: visible;
+}
+
+.confirm_btns,.sub_btns{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    margin-right: 10px;
+}
+.conf_No, .conf_Yes{
+    size: 12px;
 }
