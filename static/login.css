@@ -1,0 +1,59 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+}
+.container{
+    background-color: rgb(72, 104, 220);
+    color:white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 50vh;
+    height: 60vh;
+    border-radius: 15px;
+    margin-top: 20vh;
+}
+.login{
+    margin-top: 10px;
+    justify-content: center;
+    width: 90px;
+    height: 40px;
+    border-radius: 14px;
+    border: none;
+    
+    align-self: center;
+    padding: 10px;
+    color: rgb(72, 104, 220);
+    size: larger;
+    font-weight: bold;
+    
+}
+.login_cont{
+    display: block;
+    text-align: center;
+    padding: 10px;
+}
+
+input{
+    width: 300px;
+    height: 23px;
+    border:none;
+    font-size: 18px;
+    padding: 8px;
+    border-radius: 10px;
+    color: rgb(72, 104, 220);
+
+    
+}
+
+.message{
+    width: 300px;
+    height: 23px;
+    border:none;
+    font-size: 18px;
+    padding: 8px;
+    border-radius: 10px;
+    color: rgb(72, 104, 220);
+}

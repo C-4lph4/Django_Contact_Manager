@@ -152,3 +152,7 @@ button{
 .conf_No, .conf_Yes{
     size: 12px;
 }
+
+.form_style{
+    color:red;
+}

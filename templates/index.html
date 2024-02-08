@@ -9,8 +9,13 @@
   </head>
   <body>
     <header class="header">
-      <a href="#" class="logo">DCM</a>
-      <a href="#" class="login">Log in</a>
+      <a href="/" class="logo">DCM</a>
+
+      {% if user.is_authenticated%}
+      <div class="login">{{user.username}}</div>
+      {%else%}
+      <a href="login" class="login">Log in</a>
+      {%endif%}
     </header>
     <main>
       {%if editForm%}
@@ -32,7 +37,7 @@
       {%else%}
       <div class="popup_form" id="form">
         <form action="" method="post">
-          {%csrf_token%} {{addForm}}
+          {%csrf_token%} {{addForm.as_p}}
           <div class="sub_btns">
             <button class="close_btn" type="button" onclick="closeForm()">
               Cancel
@@ -60,7 +65,9 @@
       </div>
       <div class="head">
         <h1>Contacts</h1>
+        {% if user.is_authenticated%}
         <button class="add_btn" type="submit" onclick="showForm()">+Add</button>
+        {% endif%}
       </div>
       <div class="table">
         <section class="table_body">
@@ -80,6 +87,7 @@
                 <td>{{contact.phone_number}}</td>
                 <td>{{contact.email}}</td>
                 <td>{{contact.address}}</td>
+                {% if user.is_authenticated%}
                 <td>
                   <form action="" method="post">
                     {%csrf_token%}
@@ -96,6 +104,7 @@
                 <td>
                   <button class="del_btn" value="{{contact.id}}">Delete</button>
                 </td>
+                {% endif%}
               </tr>
               {%endfor%}
             </tbody>
