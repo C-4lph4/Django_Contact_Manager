@@ -8,7 +8,7 @@ from django.contrib import messages
 
 
 def index(request):
-    contact = Contact.objects.all()
+    contacts = Contact.objects.all()
     if request.method == "POST":
         if "edit" in request.POST:
             pk = request.POST.get("edit")
@@ -18,26 +18,33 @@ def index(request):
             return render(
                 request,
                 "index.html",
-                {"editForm": editForm, "contacts": contact, "contact_id": pk},
+                {"editForm": editForm, "contacts": contacts, "contact_id": pk},
             )
         elif "edited" in request.POST:
             pk = request.POST.get("edited")
             contact_obj = Contact.objects.get(pk=pk)
-            editedForm = ContactForm(request.POST, instance=contact_obj)
+            editedForm = ContactForm(request.POST, request.FILES, instance=contact_obj)
             if editedForm.is_valid:
                 editedForm.save()
             return redirect("/")
 
         else:
-            AddForm = ContactForm(request.POST)
+            AddForm = ContactForm(request.POST, request.FILES)
             if AddForm.is_valid():
                 AddForm.save()
 
             return redirect("/")
     else:
-
         addForm = ContactForm()
-        return render(request, "index.html", {"addForm": addForm, "contacts": contact})
+        if "query" in request.GET:
+            query = request.GET.get("query")
+            contacts = (
+                Contact.objects.filter(name__icontains=query)
+                if query
+                else Contact.objects.all()
+            )
+
+        return render(request, "index.html", {"addForm": addForm, "contacts": contacts})
 
 
 def delete(request, pk):

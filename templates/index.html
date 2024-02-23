@@ -6,77 +6,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
     <link rel="stylesheet" href={% static 'style.css' %}>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   </head>
   <body>
     <header class="header">
       <a href="/" class="logo">DCM</a>
+      
 
       {% if user.is_authenticated%}
+      <div class='admin'>
       <div class="login">{{user.username}}</div>
+      <img
+                    class="image"
+                    src="/media/blank.png"
+                    alt="Contact image"
+                  />
+      </div>
       {%else%}
       <a href="login" class="login">Log in</a>
       {%endif%}
     </header>
-    <main>
-      {%if editForm%}
-      <div class="edit_form">
-        <form action="" method="post">
-          {%csrf_token%} {{editForm.as_p}}
-          <div class="sub_btns">
-            <button
-              class="close_btn"
-              type="submit"
-              name="edited"
-              value="{{contact_id}}"
-            >
-              Submit
-            </button>
-          </div>
+    <div class='container'>
+      <div class="heading">
+        <div class="caption ">
+          <h1>CONTACTS</h1>
+        {% if user.is_authenticated%}
+          <button class="add_btn" type="submit" onclick="showForm()">+ New Contact</button>
+        {% endif%}
+        </div>
+      <div class="flex">
+        <form action="" Met>
+            <input type="text" placeholder="Search by Name" class="search_input">
+      
+          <button class="conf_Yes" type="submit">
+            <i class="fas fa-filter"></i>  Filter</button>
         </form>
       </div>
-      {%else%}
-      <div class="popup_form" id="form">
-        <form action="" method="post">
-          {%csrf_token%} {{addForm.as_p}}
-          <div class="sub_btns">
-            <button class="close_btn" type="button" onclick="closeForm()">
-              Cancel
-            </button>
-            <button
-              class="close_btn"
-              type="submit"
-              value="add"
-              onclick="closeForm()"
+       {% if editForm %}
+        <div class="edit_form">
+          <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form_img"><img src={{edit_form.Name}} /></div>
+            {{ editForm.as_p }}
+            <div class="sub_btns">
+              <button
+                class="close_btn"
+                type="submit"
+                name="edited"
+                value="{{ contact_id }}"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+        {% else %}
+        <div class="popup_form" id="form">
+          <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %} {{ addForm.as_p }}
+            <div class="sub_btns">
+              <button class="close_btn" type="button" onclick="closeForm()">
+                Cancel
+              </button>
+              <button
+                class="close_btn"
+                type="submit"
+                value="add"
+                onclick="closeForm()"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+        {% endif %}
+
+        <div class="prompt" id="prompt">
+          <p>Delete this contact?</p>
+          <div class="confirm_btns">
+            <button class="conf_No" onclick="closePrompt()">No</button>
+            <a id="del_link" href="#"
+              ><button class="conf_Yes" onclick="closePrompt()">Yes</button></a
             >
-              Submit
-            </button>
           </div>
-        </form>
-      </div>
-      {%endif%}
-      <div class="prompt" id="prompt">
-        <p>Delete this contact?</p>
-        <div class="confirm_btns">
-          <button class="conf_No" onclick="closePrompt()">No</button>
-          <a id="del_link" href="#"
-            ><button class="conf_Yes" onclick="closePrompt()">Yes</button></a
-          >
         </div>
       </div>
 
-      <div class="table">
-        <div class="table_header">
-          <h1>Contacts</h1>
-          {% if user.is_authenticated%}
-          <button class="add_btn" type="submit" onclick="showForm()">
-            +Add
-          </button>
-          {% endif%}
-        </div>
-        <div class="table_body">
+        <div class="table">
           <table>
-            <thead>
-              <tr class="table_head">
+            <thead >
+              <tr class="table_head ">
+                <th>Picture</th>
                 <th>Name</th>
                 <th>Phone Number</th>
                 <th>E-mail</th>
@@ -86,8 +106,14 @@
               </tr>
             </thead>
             <tbody>
-              {% for contact in contacts%}
+              {% for contact in contacts reversed%}
               <tr>
+                <td>
+                  <img
+                    class="image"
+                    src="{{contact.picture.url}}"
+                  />
+                </td>
                 <td>{{contact.name}}</td>
                 <td>{{contact.phone_number}}</td>
                 <td>{{contact.email}}</td>
@@ -102,13 +128,17 @@
                       name="edit"
                       value="{{contact.id}}"
                     >
-                      Edit
+                    <i class="fas fa-edit"></i>
                     </button>
                   </form>
                 </td>
                 <td>
-                  <button class="del_btn" value="{{contact.id}}">Delete</button>
+                  <button class="del_btn" value="{{contact.id}}"><i class="fas fa-trash"></i></button>
+
                 </td>
+                {%else%}
+                <td></td>
+                <td></td>
                 {% endif%}
               </tr>
               {%endfor%}
@@ -116,7 +146,7 @@
           </table>
         </div>
       </div>
-    </main>
+    </div>
     <script>
       const form = document.getElementById("form");
       const prompt = document.getElementById("prompt");

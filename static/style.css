@@ -9,14 +9,15 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #d3d8e5;
 }
 .header{
-    background-color: rgb(60, 126, 225);
+    background-color: rgb(20, 101, 222);
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 1.3rem 10%;
+    padding: .90rem 10%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -24,6 +25,7 @@ body{
 }
 .logo{
     font-size: 1.6rem;
+    font-family: fantasy;
     text-decoration: none;
     font-weight: 700;
     color: white;
@@ -33,14 +35,16 @@ table,th,td{
     padding: 1rem;
     border-collapse: collapse;
 }
-.table{
-    width: 90vw;
-    height: 90vh;
-    background-color: #0005;
+table{
+    width: 80vw;
+    height: 80vh;
+    background-color: #fff;
     backdrop-filter: blur(7px);
     box-shadow: 0 .4rem .8rem #fff5 ;
     border-radius: .8rem;
-    overflow: hidden;
+
+    padding-top: 20px;
+    
 }
 
 .table_body{
@@ -60,55 +64,84 @@ table,th,td{
     position:sticky;
     justify-content: space-between;
 }
-.table_body::-webkit-scrollbar{
+.table{
+    max-height: calc(100vh - 200px);
+    overflow: auto;
+}
+.table::-webkit-scrollbar{
     width: 0.5rem;
     height: 0.5rem;
 }
-.table_body::-webkit-scrollbar-thumb{
+.table::-webkit-scrollbar-thumb{
     border-radius: 0.5rem;
     background-color: #fff4;
     visibility: hidden;
     
 }
-.table_body:hover:-webkit-scrollbar-thumb{
+.table:hover:-webkit-scrollbar-thumb{
     visibility: visible;
     
 }
 table{
     width: 100%;
+    overflow-y: auto;
 }
 thead{
     background-color: #fff;
     text-align: left;
+
+
 }
-thead th{
-    position:sticky;
-    top: 0;
-    
-    
+tbody tr td{
+    max-height: 10px;
+    border-collapse: collapse;
+   
 }
+
 tbody tr:nth-child(even){
     background-color: #fff3;
 }
 tbody tr:hover{
     background-color: #fff6;
 }
+.table td{
+    height: 60px;
+    vertical-align: middle;
+}
+.table tbody{
+    height: 100px;
+    overflow-y: auto;
+}
 
-main{
+.container{
     padding-top: 4rem;
+    width: 80%;
     
 }
+.table_head{
+    height: 60px;
+    font-weight:800;
+   
+    
+}
+.table thead th{
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+
+}
 .add_btn{
+    margin-left: 20px;
     padding: 8px 14px;
-    border: none;
+    border-color:rgb(83, 133, 213) ;
     border-radius: 8px;
-    color: white;
-    background-color:rgb(60, 126, 225) ;
+    color: rgb(83, 133, 213);
+    background-color:rgb(189, 203, 225) ;
 }
 .add_btn:hover{
     
-    color: rgb(60, 126, 225);
-    background-color:white ;
+    color: white;
+    background-color:rgb(60, 126, 225);
 }
 .login{
     text-decoration: none;
@@ -272,4 +305,64 @@ button{
 p{
     color: white;
     font-size: 18px;
+}
+img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+}
+
+.search_input{
+    padding: 8px;
+    font-size: 15px;
+    border: none;
+    border-radius: 8px;
+    margin-right: 10px;
+    
+}
+.flex{
+    display: flex;
+    width: 80vw;
+    
+}
+.admin{
+    display: flex;
+    justify-content: space-between;
+    align-items:  center;
+}
+.admin img{
+    width: 40px;
+    height: 40px;
+    margin: 4px;
+}
+
+.caption{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+}
+
+.caption h1{
+    font-family:  Geneva, Tahoma, sans-serif;
+
+}
+
+.sticky{
+    position: sticky;
+}
+
+.heading{
+    margin-bottom: 10px;
+}
+
+.search-container i {
+    position: absolute;
+    left: 10px; 
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa; 
+}
+form{
+    width: 100%;
 }
