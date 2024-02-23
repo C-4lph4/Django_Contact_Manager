@@ -7,7 +7,7 @@ class ContactForm(forms.ModelForm):
         model = Contact
         fields = "__all__"
         widgets = {
-            "picture":forms.ClearableFileInput(attrs={"class": "form_style"}),
+            "picture":forms.ClearableFileInput(attrs={"class": "form_style file_input"}),
             "name": forms.TextInput(attrs={"class": "form_style"}),
             "email": forms.TextInput(attrs={"class": "form_style"}),
             "phone_number": forms.TextInput(attrs={"class": "form_style"}),

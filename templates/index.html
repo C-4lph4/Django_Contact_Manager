@@ -19,7 +19,6 @@
       <img
                     class="image"
                     src="/media/blank.png"
-                    alt="Contact image"
                   />
       </div>
       {%else%}
@@ -35,8 +34,8 @@
         {% endif%}
         </div>
       <div class="flex">
-        <form action="" Met>
-            <input type="text" placeholder="Search by Name" class="search_input">
+        <form action="" >
+            <input type="text" placeholder="Search by Name" class="search_input" name="query">
       
           <button class="conf_Yes" type="submit">
             <i class="fas fa-filter"></i>  Filter</button>
@@ -46,7 +45,7 @@
         <div class="edit_form">
           <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="form_img"><img src={{edit_form.Name}} /></div>
+            <div class="form_img"><img src={{picture}} class="contact_pic" /></div>
             {{ editForm.as_p }}
             <div class="sub_btns">
               <button
@@ -107,7 +106,7 @@
             </thead>
             <tbody>
               {% for contact in contacts reversed%}
-              <tr>
+              <tr id="table_row">
                 <td>
                   <img
                     class="image"

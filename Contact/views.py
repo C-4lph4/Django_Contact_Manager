@@ -14,11 +14,16 @@ def index(request):
             pk = request.POST.get("edit")
 
             contact_obj = Contact.objects.get(pk=pk)
-            editForm = ContactForm(instance=contact_obj)
+            editForm = ContactForm(instance=contact_obj, initial={"picture": "/"})
             return render(
                 request,
                 "index.html",
-                {"editForm": editForm, "contacts": contacts, "contact_id": pk},
+                {
+                    "editForm": editForm,
+                    "contacts": contacts,
+                    "contact_id": pk,
+                    "picture": contact_obj.picture.url,
+                },
             )
         elif "edited" in request.POST:
             pk = request.POST.get("edited")
